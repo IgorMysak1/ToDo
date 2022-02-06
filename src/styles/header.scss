@@ -1,0 +1,249 @@
+@import "../index.scss";
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  @media (max-width: $md3) {
+    flex-direction: column;
+    padding: 10px 0px;
+  }
+}
+.title {
+  font-size: 30px;
+  color: #000;
+  margin-right: 20px;
+  text-shadow: 4px 3px 4px #727272;
+  z-index: 20;
+  span {
+    color: #ebdc18;
+    margin: 0 -2px 0 -9px;
+  }
+  @media (max-width: $md3) {
+    margin: 0;
+    padding-bottom: 10px;
+  }
+}
+.addTask {
+  height: 100%;
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  padding: 0px 213px 0px 10px;
+  outline: none;
+  font-size: 20px;
+  z-index: 15;
+  &-invalid {
+    border: 2px solid red;
+  }
+  @media (max-width: $md4) {
+    padding: 2px 116px 3px 10px;
+    font-size: 15px;
+  }
+}
+.inp {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  &::before {
+    content: "";
+    height: 56px;
+    width: 100%;
+    position: absolute;
+    top: -45px;
+    right: 0;
+    background: #d2d5dd;
+    z-index: 15;
+    @media (max-width: $md4) {
+      top: -56px;
+      height: 67px;
+    }
+  }
+  @media (max-width: $md3) {
+    width: 100%;
+  }
+}
+.linkBtn {
+  position: absolute;
+  top: 2px;
+  right: 156px;
+  z-index: 15;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ebdc18;
+  border-radius: 9px;
+  padding: 2px 4px;
+  font-size: 12px;
+  cursor: pointer;
+  img {
+    height: 15px;
+    width: 15px;
+    margin-left: 5px;
+  }
+  @media (max-width: $md4) {
+    top: -27px;
+    right: 0;
+    font-size: 14px;
+  }
+}
+.linkInput {
+  width: 100%;
+  position: absolute;
+  top: 35px;
+  left: 0;
+  transition: all 0.3s ease 0s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  input {
+    height: 25px;
+    width: 80%;
+    border: none;
+    border-radius: 20px;
+    padding: 0 10px;
+    outline: none;
+    font-size: 17px;
+    z-index: 10;
+  }
+  &-open {
+    transition: all 0.3s ease 0s;
+    top: -35px;
+  }
+  @media (max-width: $md4) {
+    top: 30px;
+  }
+}
+.linkAdd {
+  width: 18%;
+  background: #ebdc18;
+  padding: 5px 18px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 13px;
+}
+.select {
+  max-width: 150px;
+  width: 39%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  right: 0;
+  img {
+    transition: 0.4s;
+  }
+}
+
+.option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #b8bacf;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 11px;
+  border-top-left-radius: 0;
+  transition: border-bottom-left-radius 0.15s ease 0.4s;
+  z-index: 15;
+  img {
+    height: 16px;
+    width: 16px;
+    transform: rotate(90deg);
+  }
+  &-rounded {
+    transition: all 0.4s ease 0s;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 4px dashed #f1e986;
+    border-bottom: navajowhite;
+  }
+}
+.optionText {
+  font-size: 14px;
+  overflow: hidden;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.options {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  position: absolute;
+  top: -200px;
+  background: #b8bacf;
+  transition: all 0.4s ease 0s;
+  border-radius: 14px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  z-index: 10;
+  padding-bottom: 4px;
+  border: 4px dashed #f1e986;
+  border-top: none;
+  &-active {
+    top: 25px;
+  }
+}
+.addCategory {
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  padding-left: 7px;
+  outline: none;
+  font-size: 13px;
+}
+.navigation {
+  img {
+    height: 30px;
+    width: 30px;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+  @media (max-width: $md3) {
+    display: none;
+  }
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-5px);
+  }
+  20% {
+    transform: translateX(5px);
+  }
+  30% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  60% {
+    transform: translateX(5px);
+  }
+  70% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+  90% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

@@ -1,0 +1,153 @@
+@import "../index.scss";
+.tasks {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+.task {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  background: #9a9dc1;
+  border-radius: 10px 20px 10px 20px;
+  // padding: 10px;
+  margin: 10px 0;
+  transition: all 0.5s ease;
+  position: relative;
+  box-shadow: 8px 9px 7px -3px #727272;
+  @media (max-width: $md4) {
+    padding: 6px;
+    margin: 6px 0px;
+  }
+  &-active {
+    margin-bottom: 35px;
+    @media (max-width: $md4) {
+      margin-bottom: 40px;
+    }
+  }
+}
+.taskBtns {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.taskVisible {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  background: #9a9dc1;
+  border-radius: 10px 20px 10px 20px;
+  text-shadow: 2px 1px 2px #727272;
+  font-size: 19px;
+  padding: 6px 10px;
+  transition: all 0.5s ease 0s;
+  &-active {
+    border-radius: 10px 20px 10px 0;
+    transition: all 0.5s ease 0s;
+  }
+  a {
+    color: #22253b;
+    text-decoration: none;
+    position: relative;
+    padding-left: 5px;
+    &::before {
+      content: "";
+      position: absolute;
+      top: -16px;
+      left: -15px;
+      z-index: 10;
+      height: 20px;
+      width: 20px;
+      background: url(../../public/img/linkTask.svg);
+      background-size: 20px;
+      transform: rotate(86deg);
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: -21px;
+      left: -20px;
+      z-index: 5;
+      height: 30px;
+      width: 30px;
+      border-radius: 15px;
+      background: #9a9dc1;
+    }
+    @media (max-width: $md4) {
+      & {
+        font-size: 16px;
+      }
+      &::before,
+      &::after {
+        content: "";
+        display: none;
+      }
+    }
+  }
+}
+.taskUnVisible {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 1px;
+  background: #9a9dc1;
+  z-index: 1;
+  padding-top: 3px;
+  border-radius: 10px;
+  transition: all 0.5s ease;
+  border-radius: 10px 20px 10px 20px;
+  &-active {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    top: 37px;
+    box-shadow: 8px 8px 7px -3px #727272;
+  }
+  // &::before {
+  //   content: "";
+  //   color: #fff;
+  //   position: absolute;
+  //   top: 8px;
+  //   left: 14px;
+  //   background: #000;
+  //   height: 28px;
+  //   width: 3px;
+  //   z-index: 5;
+  //   border-radius: 20px;
+  //   @media (max-width: $md3) {
+  //     top: 10px;
+  //     height: 25px;
+  //   }
+  // }
+}
+.editName {
+  border-radius: 20px;
+  border: none;
+  width: 80%;
+  outline: none;
+  font-size: 18px;
+  background: #e8e9e9;
+  padding: 0px 10px;
+  @media (max-width: $md3) {
+    width: 100%;
+  }
+}
+.editLink {
+  border-radius: 20px;
+  border: none;
+  width: 100%;
+  outline: none;
+  font-size: 17px;
+  margin: 10px 10px 10px 21px;
+  background: #e8e9e9;
+  padding-left: 10px;
+}

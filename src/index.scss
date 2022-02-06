@@ -1,0 +1,84 @@
+$minWidth: 320px;
+$maxWidth: 1920;
+$maxWidthContainer: 1170px;
+$md1: 1170px;
+$md2: 991.98px;
+$md3: 767.98px;
+$md4: 479.98px;
+
+._container {
+  max-width: $maxWidthContainer;
+  margin: 0 auto 20px;
+  padding: 0px 25px;
+  @media (max-width: $md1) {
+    max-width: 970px;
+  }
+  @media (max-width: $md2) {
+    max-width: 750px;
+  }
+  @media (max-width: $md3) {
+    max-width: none;
+  }
+  @media (max-width: $md4) {
+    padding: 0 10px;
+  }
+}
+.wrapper {
+  width: 100%;
+}
+@font-face {
+  font-family: "BalsamiqSans-Bold";
+  src: local("BalsamiqSans-regular"),
+    url("./fonts/BalsamiqSans/BalsamiqSans-Bold.ttf") format("truetype");
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #22253b;
+}
+body {
+  background: #d2d5dd;
+  font-family: "BalsamiqSans-Bold";
+}
+input {
+  font-family: "BalsamiqSans-Bold";
+}
+.invalid {
+  animation: move 1.5s;
+}
+@keyframes move {
+  0% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-5px);
+  }
+  20% {
+    transform: translateX(5px);
+  }
+  30% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  60% {
+    transform: translateX(5px);
+  }
+  70% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+  90% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
