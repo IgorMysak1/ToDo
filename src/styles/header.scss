@@ -1,4 +1,4 @@
-@import "../index.scss";
+@import "../../public/md.scss";
 .header {
   width: 100%;
   display: flex;
@@ -85,9 +85,7 @@
     margin-left: 5px;
   }
   @media (max-width: $md4) {
-    top: -27px;
-    right: 0;
-    font-size: 14px;
+    display: none;
   }
 }
 .linkInput {

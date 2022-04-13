@@ -1,11 +1,15 @@
-$minWidth: 320px;
-$maxWidth: 1920;
-$maxWidthContainer: 1170px;
-$md1: 1170px;
-$md2: 991.98px;
-$md3: 767.98px;
-$md4: 479.98px;
-
+@import "../public/md.scss";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #22253b;
+}
+@font-face {
+  font-family: "BalsamiqSans-Bold";
+  src: local("BalsamiqSans-regular"),
+    url("./fonts/BalsamiqSans/BalsamiqSans-Bold.ttf") format("truetype");
+}
 ._container {
   max-width: $maxWidthContainer;
   margin: 0 auto 20px;
@@ -25,17 +29,6 @@ $md4: 479.98px;
 }
 .wrapper {
   width: 100%;
-}
-@font-face {
-  font-family: "BalsamiqSans-Bold";
-  src: local("BalsamiqSans-regular"),
-    url("./fonts/BalsamiqSans/BalsamiqSans-Bold.ttf") format("truetype");
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  color: #22253b;
 }
 body {
   background: #d2d5dd;

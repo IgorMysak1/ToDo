@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "../components/Button";
 import { AppContext } from "../AppProvider";
+import { setLocalStorage } from "../utilits/functions";
 import "../styles/task.scss";
 
 export const Task = ({ nameCategory }) => {
@@ -10,17 +11,17 @@ export const Task = ({ nameCategory }) => {
   const [everyTasksState, setEveryTasksState] = useState([]);
 
   const updateNumOfElemInState = () => {
-    setEveryTasksState([
-      ...new Array(dataOfCategories[nameCategory].length).fill({
+    setEveryTasksState(
+      new Array(dataOfCategories[nameCategory].length).fill({
         name: "",
         link: "",
         state: false,
-      }),
-    ]);
+      })
+    );
   };
 
-  const changeStateTask = (nameTask, linkTask, currentIndex, stateTask) => {
-    return everyTasksState.map((task, index) =>
+  const changeStateTask = (nameTask, linkTask, currentIndex, stateTask) =>
+    everyTasksState.map((task, index) =>
       currentIndex === index
         ? {
             name: nameTask,
@@ -29,18 +30,17 @@ export const Task = ({ nameCategory }) => {
           }
         : task
     );
-  };
 
   const deleteTask = (currentIndex) => {
     const arr = dataOfCategories[nameCategory].filter((task, index) =>
       currentIndex !== index ? task : null
     );
-    setDataOfCategories({ ...dataOfCategories, [nameCategory]: arr });
-    setEveryTasksState([...arr]);
-    localStorage.setItem(
-      "dataOfCategories",
-      JSON.stringify({ ...dataOfCategories, [nameCategory]: arr })
-    );
+    //
+    const objData = { ...dataOfCategories, [nameCategory]: arr };
+    setDataOfCategories(objData);
+    //
+    setEveryTasksState(arr);
+    setLocalStorage("dataOfCategories", objData);
   };
 
   const confirmChangedTask = (currentIndex) => {
@@ -52,26 +52,21 @@ export const Task = ({ nameCategory }) => {
           }
         : task
     );
-    setEveryTasksState([
-      ...changeStateTask(
+    setEveryTasksState(
+      changeStateTask(
         everyTasksState[currentIndex].name,
         everyTasksState[currentIndex].link,
         currentIndex,
         false
-      ),
-    ]);
-    setDataOfCategories({
-      ...dataOfCategories,
-      [nameCategory]: [...arr],
-    });
-
-    localStorage.setItem(
-      "dataOfCategories",
-      JSON.stringify({
-        ...dataOfCategories,
-        [nameCategory]: [...arr],
-      })
+      )
     );
+    //
+    const objData = {
+      ...dataOfCategories,
+      [nameCategory]: arr,
+    };
+    setDataOfCategories(objData);
+    setLocalStorage("dataOfCategories", objData);
   };
   return (
     <div className="tasks">
@@ -80,7 +75,7 @@ export const Task = ({ nameCategory }) => {
         : dataOfCategories[nameCategory].map((item, index) => {
             return (
               <div
-                key={item}
+                key={item.name}
                 className={
                   everyTasksState[index].state ? "task task-active" : "task"
                 }
@@ -127,7 +122,7 @@ export const Task = ({ nameCategory }) => {
                     {everyTasksState[index].state ? (
                       <Button
                         handlerClick={() => confirmChangedTask(index)}
-                        img={"/img/tick.svg"}
+                        img={"img/tick.svg"}
                       />
                     ) : (
                       <Button
@@ -141,15 +136,13 @@ export const Task = ({ nameCategory }) => {
                             ),
                           ])
                         }
-                        img={"/img/edit.svg"}
+                        img={"img/edit.svg"}
                       />
                     )}
 
                     <Button
-                      handlerClick={() => {
-                        deleteTask(index);
-                      }}
-                      img={"/img/basket.svg"}
+                      handlerClick={() => deleteTask(index)}
+                      img={"img/basket.svg"}
                       bg={"#BD2F2F"}
                     />
                   </div>

@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-
+import {
+  deleteCurrCategoryFromCategories,
+  getLocalStorage,
+  setLocalStorage,
+} from "./utilits/functions";
 export const AppContext = React.createContext({});
 
 export const AppProvider = ({ children }) => {
@@ -10,16 +14,12 @@ export const AppProvider = ({ children }) => {
   const [allCategories, setAllCategories] = useState(["All"]);
   const [categoryInOptions, setCategoryInOptions] = useState([]);
 
-  let dataOfCategoriesFromStorage = JSON.parse(
-    localStorage.getItem("dataOfCategories")
-  );
-  let allCategoriesFromStorage = JSON.parse(
-    localStorage.getItem("allCategories")
-  );
+  let dataOfCategoriesFromStorage = getLocalStorage("dataOfCategories");
+  let allCategoriesFromStorage = getLocalStorage("allCategories");
   useEffect(() => {
     if (dataOfCategoriesFromStorage == null) {
-      localStorage.setItem("dataOfCategories", JSON.stringify({ All: [] }));
-      localStorage.setItem("allCategories", JSON.stringify(["All"]));
+      setLocalStorage("dataOfCategories", { All: [] });
+      setLocalStorage("allCategories", ["All"]);
       setActiveCategory("All");
     } else {
       setDataOfCategories({ ...dataOfCategoriesFromStorage });
@@ -27,10 +27,11 @@ export const AppProvider = ({ children }) => {
       setActiveCategory(allCategoriesFromStorage[0]);
     }
   }, []);
-  const deleteCurrCategoryFromCategories = (nameCategory) =>
-    allCategories.filter((name) => name !== nameCategory);
+
   useEffect(() => {
-    setCategoryInOptions([...deleteCurrCategoryFromCategories(activeCategory)]);
+    setCategoryInOptions([
+      ...deleteCurrCategoryFromCategories(activeCategory, allCategories),
+    ]);
   }, [allCategories]);
 
   const enterTaskInput = useRef(null);

@@ -1,5 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { AppContext } from "../AppProvider";
+import {
+  deleteCurrCategoryFromCategories,
+  setLocalStorage,
+} from "../utilits/functions";
 import "../styles/header.scss";
 
 export const Header = () => {
@@ -27,69 +31,51 @@ export const Header = () => {
   const addLinkInp = useRef(null);
   const categoryInp = useRef(null);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setAddLinkOpen(false);
-    }, 3000);
-  }, []);
-
-  const deleteCurrCategoryFromCategories = (nameCategory) =>
-    allCategories.filter((name) => name !== nameCategory);
-
   const createCategory = (e) => {
     if (allCategories.includes(e.target.value) || e.target.value === "") {
       invalidValue(e.target);
       return;
     }
-
-    setDataOfCategories({ ...dataOfCategories, [e.target.value]: [] });
-    localStorage.setItem(
-      "dataOfCategories",
-      JSON.stringify({ ...dataOfCategories, [e.target.value]: [] })
-    );
-
+    //
+    const objData = { ...dataOfCategories, [e.target.value]: [] };
+    setDataOfCategories(objData);
+    setLocalStorage("dataOfCategories", objData);
+    //
+    const arrSave = [...allCategories, e.target.value];
+    setAllCategories(arrSave);
+    setLocalStorage("allCategories", arrSave);
+    //
     setCategoryInOptions([
-      ...deleteCurrCategoryFromCategories(activeCategory),
+      ...deleteCurrCategoryFromCategories(activeCategory, allCategories),
       e.target.value,
     ]);
-    setAllCategories([...allCategories, e.target.value]);
-    localStorage.setItem(
-      "allCategories",
-      JSON.stringify([...allCategories, e.target.value])
-    );
-
+    //
     setAllInputs({ ...allInputs, сategory: "" });
   };
   const chooseOption = (nameCategory) => {
-    setActiveCategory(nameCategory);
-    setCategoryInOptions([...deleteCurrCategoryFromCategories(nameCategory)]);
     setSelectOpen(false);
+    setActiveCategory(nameCategory);
+    setCategoryInOptions([
+      ...deleteCurrCategoryFromCategories(nameCategory, allCategories),
+    ]);
     enterTaskInput.current.focus();
   };
   const saveNewTask = () => {
-    if (allInputs.task === "") {
-      invalidValue(document.querySelector(".addTask"));
+    if (!allInputs.task) {
+      invalidValue(enterTaskInput.current);
       return;
     }
-
-    setDataOfCategories({
+    //
+    const objData = {
       ...dataOfCategories,
       [activeCategory]: [
         ...dataOfCategories[activeCategory],
         { name: allInputs.task, link: allInputs.link },
       ],
-    });
-
-    localStorage.setItem(
-      "dataOfCategories",
-      JSON.stringify({
-        ...dataOfCategories,
-        [activeCategory]: [
-          ...dataOfCategories[activeCategory],
-          { name: allInputs.task, link: allInputs.link },
-        ],
-      })
-    );
+    };
+    setDataOfCategories(objData);
+    setLocalStorage("dataOfCategories", objData);
+    //
     setAllInputs({ ...allInputs, task: "", link: "" });
     enterTaskInput.current.focus();
   };
@@ -99,6 +85,11 @@ export const Header = () => {
       e.style.animation = "";
     }, 2000);
   };
+  useEffect(() => {
+    setTimeout(() => {
+      setAddLinkOpen(false);
+    }, 3000);
+  }, []);
   return (
     <div className="header">
       <div className="title">
@@ -125,7 +116,7 @@ export const Header = () => {
             className="linkBtn"
           >
             add
-            <img src="img/linkAdd.svg" alt="Link" />
+            <img src="img/tick.svg" alt="Link" />
           </div>
           <div
             className={addLinkOpen ? "linkInput" : "linkInput linkInput-open"}

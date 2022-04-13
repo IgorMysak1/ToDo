@@ -1,4 +1,4 @@
-@import "../index.scss";
+@import "../../public/md.scss";
 .tasks {
   width: 100%;
   display: flex;
@@ -147,7 +147,7 @@
   width: 100%;
   outline: none;
   font-size: 17px;
-  margin: 10px 10px 10px 21px;
+  margin: 10px 10px 10px 16px;
   background: #e8e9e9;
   padding-left: 10px;
 }
